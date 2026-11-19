@@ -1,12 +1,10 @@
-/* Visitor measurement for candor.works. This file runs before the outside scripts load.
-   The notice visitors can read is at /privacy/. */
-var GA_ID = 'G-F25RZE6HX8';       /* Google Analytics: the ID inside Google's tag GTM-N2B2TFKS, which index.html loads */
-var LF_ID = 'JMvZ8gv5yOpa2pOd';   /* Leadfeeder: the tracker ID of the candor.works account */
+/* candor.works analytics. Notice: /privacy/ */
+var GA_ID = 'G-F25RZE6HX8';       /* Google Analytics, inside tag GTM-N2B2TFKS (index.html) */
+var LF_ID = 'JMvZ8gv5yOpa2pOd';   /* Leadfeeder */
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 
-/* Any browser can be taken out of the count: open /?notrack=1 in it once (the privacy page links to it, and the
-   team uses it for its own browsers). /?notrack=0 puts it back. The choice is kept in that browser only. */
+/* opt-out: /?notrack=1 sets a flag in this browser, /?notrack=0 clears it */
 var OPTED_OUT = (function(){
   var KEY = 'cw_notrack', q = location.search, off = false, saved = true;
   try{
@@ -26,22 +24,19 @@ var OPTED_OUT = (function(){
   return off;
 })();
 
-/* Google Analytics. Nobody's visit is used for advertising. Visitors in the European Economic Area, the United
-   Kingdom and Switzerland get no analytics cookies. An opted-out browser sends nothing. */
+/* Google Analytics: no ad use; no cookies for EEA, UK and Swiss visitors */
 if(OPTED_OUT) window['ga-disable-' + GA_ID] = true;
 gtag('consent', 'default', {ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'granted'});
 gtag('consent', 'default', {analytics_storage: 'denied', region: ['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB','CH']});
 gtag('js', new Date());
 
-/* A click on an e-mail link is counted. Only which link it was is sent (its id and class), never an address. */
+/* e-mail link clicks: link id and class only */
 document.addEventListener('click', function(e){
   var a = e.target && e.target.closest ? e.target.closest('a[href^="mailto:"]') : null;
   if(a) gtag('event', 'contact_click', {link_id: a.id, link_classes: a.className});
 });
 
-/* Leadfeeder names the company a visit comes from. It stores a cookie, so it is not loaded at all for a browser
-   that has opted out, nor for a browser whose clock is set to a European time zone. The loader is Leadfeeder's own
-   snippet, written out. */
+/* Leadfeeder: skipped when opted out or on a European time zone (it sets a cookie) */
 (function(){
   var zone = '';
   try{ zone = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; }catch(e){}

@@ -2,19 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<!-- What this page is allowed to load: its own files, and the two visitor-measurement services. The Google addresses
-     are the ones Google lists for Analytics without advertising features; the lfeeder / leadfeeder ones are the ones
-     Leadfeeder lists for its tracker. A new script, font, picture or embed from any other address will not load
-     until it is added to this line. -->
+<!-- CSP: list any new outside script, font, image or embed here -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://www.googletagmanager.com https://*.lfeeder.com https://*.leadfeeder.com; style-src 'self'; font-src 'self'; img-src 'self' https://www.googletagmanager.com https://*.google-analytics.com https://*.lfeeder.com https://*.leadfeeder.com; connect-src https://www.googletagmanager.com https://*.google-analytics.com https://*.google.com https://*.lfeeder.com https://*.leadfeeder.com; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Candor Works | Community-first powered land for the AI era</title>
 <meta name="description" content="Candor Works is a community-first powered land development platform for 1–20 MW data center sites on Upper Midwest distribution grids, delivered with utility-secured capacity, fiber, and a defined energization date.">
 <link rel="preload" href="/assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/site.css">
-<!-- Visitor measurement (Google Analytics and Leadfeeder). Our settings first, then Google's tag; measure.js loads
-     Leadfeeder's tracker itself. The notice is at /privacy/. The tag below belongs with the Analytics ID named at
-     the top of measure.js: change the two together. -->
+<!-- Analytics: the tag ID below pairs with GA_ID in measure.js -->
 <script src="/assets/measure.js"></script>
 <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-N2B2TFKS"></script>
 </head>
